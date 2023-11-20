@@ -14,7 +14,7 @@ public class servidorUDP {
             System.out.println("Servidor esperando conexiones");
 
             // Dirección IP del cliente
-            InetAddress direccionIP_cliente = InetAddress.getByName("172.31.118.83"); // Ajusta la dirección IP del cliente
+            InetAddress direccionIP_cliente = InetAddress.getByName("172.31.118.82"); // Ajusta la dirección IP del cliente
 
             // Bucle principal
             while (true) {
@@ -24,9 +24,11 @@ public class servidorUDP {
                 String mensajeServidor = scanner.nextLine();
 
                 // Enviar mensaje al cliente
+                DatagramSocket enviarSocket = new DatagramSocket();
                 byte[] bufferSalida = mensajeServidor.getBytes();
                 DatagramPacket paquete_enviar = new DatagramPacket(bufferSalida, bufferSalida.length, direccionIP_cliente, puerto);
-                socket.send(paquete_enviar);
+                enviarSocket.send(paquete_enviar);
+                enviarSocket.close();
 
                 // Arreglo de bytes para recibir los datos
                 byte[] bufferEntrada = new byte[1024];
